@@ -47,6 +47,7 @@ export default function HomePage() {
         <Alert severity="warning">Admin access enabled</Alert>
       )}
       <Banner project={category?.toUpperCase()}></Banner>
+
       <Container>
         <Box
           sx={{

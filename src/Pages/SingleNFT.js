@@ -260,14 +260,14 @@ const Mint = () => {
                                       style={{ marginRight: 10, padding: 9 }}
                                     >
                                       <option>-- Please select --</option>
-                                      <option value="area-1">
-                                        Action area-1
+                                      <option value="project-1">
+                                        Project 1
                                       </option>
-                                      <option value="area-2">
-                                        Action area-2
+                                      <option value="project-2">
+                                        Project 2
                                       </option>
-                                      <option value="area-3">
-                                        Action area-3
+                                      <option value="project-3">
+                                        Project 3
                                       </option>
                                     </Field>
                                   </div>

@@ -5,15 +5,13 @@ import Logo from "./Logo";
 import SigninButton from "./SigninButton";
 import FeatureWrapper from "./FeatureWrapper";
 import FeatureTitle from "./FeatureTitle";
-import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { getIcon } from "../../utils/currencyIcon";
 import { currentNeteork } from "../../utils/currentNeteork";
 
 function HeaderCompound({ children }) {
-  let history = useNavigate();
   return (
     <HeaderWrapper className="header-wrapper-home">
       <div class="layer">
@@ -44,12 +42,12 @@ function HeaderCompound({ children }) {
           </FeatureTitle>
         </FeatureWrapper>
         <center>
-          <h2 className="h2-sub-text">
-            OpenPwc is the world's first and largest NFT marketplace
+          <h2 className="h2-sub-text" style={{ marginBottom: 40 }}>
+            Carbon offset platform
           </h2>
         </center>
-
-        <center style={{ margin: 30 }}>
+        <br />
+        {/* <center style={{ margin: 30 }}>
           <Button
             variant="contained"
             size="large"
@@ -83,7 +81,7 @@ function HeaderCompound({ children }) {
           >
             Create
           </Button>
-        </center>
+        </center> */}
         {children}
       </div>
     </HeaderWrapper>

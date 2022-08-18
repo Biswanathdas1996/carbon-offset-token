@@ -55,14 +55,14 @@ export default function RecipeReviewCard() {
         </Grid>
 
         <Grid item xs={4}>
-          {cardUI(`Action area 1`, imgx1, `/category/area-1`)}
+          {cardUI(`Project 1`, imgx1, `/category/project-1`)}
         </Grid>
         <Grid item xs={4}>
-          {cardUI(`Action area 2`, imgx2, `/category/area-2`)}
+          {cardUI(`Project 2`, imgx2, `/category/project-2`)}
         </Grid>
 
         <Grid item xs={4}>
-          {cardUI(`Action area 3`, imgx4, `/category/area-3`)}
+          {cardUI(`Project 3`, imgx4, `/category/project-3`)}
         </Grid>
       </Grid>
       <div style={{ marginTop: 50 }}></div>

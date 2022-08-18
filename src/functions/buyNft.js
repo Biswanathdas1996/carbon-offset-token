@@ -5,7 +5,7 @@ import PwcLogo from "../assets/images/nft.png";
 
 export const displayRazorpay = async (price, purchasetransction, title) => {
   const itemCost = convertWeiToToken(price);
-  const payableAmount = itemCost + 50;
+  const payableAmount = itemCost;
   const data = await fetch(`${PaymentURI}?price=${payableAmount}`, {
     method: "POST",
   })
@@ -15,7 +15,7 @@ export const displayRazorpay = async (price, purchasetransction, title) => {
     currency: data.currency,
     amount: data.amount,
     name: `Buy ${title}`,
-    description: `${itemCost} INR + 50 INR Service charge`,
+    description: `${itemCost} INR`,
     image: PwcLogo,
     order_id: data.id,
     handler: purchasetransction,

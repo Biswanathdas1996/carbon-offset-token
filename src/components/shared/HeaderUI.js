@@ -10,9 +10,7 @@ function HeaderCompound({ children }) {
           </div>
         </div>
         <center>
-          <h2 className="h2-sub-text">
-            OpenPwc is the world's first and largest NFT marketplace
-          </h2>
+          <h2 className="h2-sub-text">Carbon offset platform</h2>
         </center>
 
         {children}

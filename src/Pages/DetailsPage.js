@@ -15,6 +15,7 @@ import {
   getContractAddress,
   getcurrentNetworkId,
 } from "../CONTRACT-ABI/connect";
+import Button from "@mui/material/Button";
 
 const theme = createTheme();
 
@@ -104,6 +105,7 @@ export default function DetailsPage({ match }) {
           <Alert severity="warning">Admin access enabled</Alert>
         )}
         <CssBaseline />
+
         <Container>
           <main style={{ marginBottom: 30 }}>
             {nftData ? (
@@ -113,6 +115,21 @@ export default function DetailsPage({ match }) {
                 spacing={4}
                 marginY="50px"
               >
+                <Grid item xs={12} md={12}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={() => window.history.go(-1)}
+                    // style={{
+                    //   border: "2px solid #1976d2",
+                    //   fontSize: 16,
+                    //   padding: "17px 24px",
+                    //   borderRadius: 12,
+                    // }}
+                  >
+                    Back
+                  </Button>
+                </Grid>
                 <Grid item xs={12} md={5}>
                   <LeftConrent
                     nftData={nftData}

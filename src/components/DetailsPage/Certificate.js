@@ -281,13 +281,21 @@ export default function Certificate({ account, tokenId, attributes }) {
                   </h4>
                 </Grid>
                 <Grid item xs={12} md={6} sm={12} lg={6}>
-                  <QRCode
-                    value={`${networkURL()}/token/${getContractAddress(
+                  <a
+                    href={`${networkURL()}/token/${getContractAddress(
                       sessionStorage.getItem("currentyNetwork")
                     )}?a=${tokenId}`}
-                    size="100"
-                    style={{ float: "right" }}
-                  />
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <QRCode
+                      value={`${networkURL()}/token/${getContractAddress(
+                        sessionStorage.getItem("currentyNetwork")
+                      )}?a=${tokenId}`}
+                      size="100"
+                      style={{ float: "right" }}
+                    />
+                  </a>
                 </Grid>
               </Grid>
             </CardContent>
