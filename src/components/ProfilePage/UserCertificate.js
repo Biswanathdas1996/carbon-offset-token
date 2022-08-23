@@ -224,7 +224,7 @@ export default function Certificate({ tokenId, attributes = [] }) {
                       <Typography
                         sx={{ fontSize: 15, fontWeight: "bold", mt: 1 }}
                       >
-                        {tokens && tokens?.length}T
+                        {tokens && tokens?.length} Matric Ton
                       </Typography>
                     </Stack>
                     <Stack
