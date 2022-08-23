@@ -19,12 +19,31 @@ const VendorSchema = Yup.object().shape({
   sendTo: Yup.string().required("Send address is required"),
 });
 
-export default function BasicCard({ productQty, carbonOffSetAmountCallback }) {
+export default function BasicCard() {
+  const [productQty, setProductQty] = React.useState(0);
   const totalAmount = formatCurrency(productQty * 10);
   const tokenQty = productQty;
 
-  const onClickHandler = ({ sendTo }) =>
-    carbonOffSetAmountCallback(Number(productQty * 10), sendTo);
+  const onClickHandler = ({ sendTo }) => {
+    var data = { amount: Number(productQty * 10), address: sendTo };
+    var event = new CustomEvent("carbonOffSetAmountCallback", { detail: data });
+    window.parent.document.dispatchEvent(event);
+  };
+
+  //   ---------------------------get data from host
+  React.useEffect(() => {
+    window.addEventListener(
+      "message",
+      function (event) {
+        if (typeof event.data == "object" && event.data.call == "productQty") {
+          // Do something with event.data.value;
+          console.log(event.data.value);
+          setProductQty(event.data.value);
+        }
+      },
+      false
+    );
+  }, []);
 
   return (
     <Card variant="outlined" style={{ padding: 10 }}>

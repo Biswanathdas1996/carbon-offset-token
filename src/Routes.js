@@ -13,8 +13,8 @@ import CategoryWiseList from "./Pages/CategoryWiseList";
 import Profile from "./Pages/Profile";
 import HowITworks from "./Pages/HowITworks";
 import SamplePage1 from "./Pages/SamplePage1";
-import SamplePage2 from "./Pages/SamplePage2";
 
+import CarbonOffsetWiget from "./components/wiget/index";
 class Routing extends React.Component {
   render() {
     return (
@@ -44,7 +44,7 @@ class Routing extends React.Component {
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/HowItWorks" element={<HowITworks />} />
         <Route exact path="/sample-1" element={<SamplePage1 />} />
-        <Route exact path="/sample-2" element={<SamplePage2 />} />
+        <Route exact path="/widget" element={<CarbonOffsetWiget />} />
         <Route
           render={function () {
             return <h1>Not Found</h1>;

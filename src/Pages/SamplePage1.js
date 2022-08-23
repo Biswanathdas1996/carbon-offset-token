@@ -114,11 +114,6 @@ function Summary({
     });
   }
 
-  const carbonOffSetAmountCallback = (amount, sendTo) => {
-    setCarbonOffsetAmount(amount);
-    setWalletAddress(sendTo);
-  };
-
   const total = subTotal - discount + tax + carbonOffsetAmount;
   const productQty = products[0]?.quantity;
 
@@ -153,25 +148,49 @@ function Summary({
   const modalClose = () => {
     setStart(false);
   };
+
+  // ------------------------------------window events
+  window.document.addEventListener(
+    "carbonOffSetAmountCallback",
+    handleEvent,
+    false
+  );
+
+  function handleEvent(e) {
+    console.log(e.detail);
+    const { amount, address } = e.detail;
+    setCarbonOffsetAmount(amount);
+    setWalletAddress(address);
+  }
+  // send data from host to iframe
+  var frame = document.querySelector("#iframe_id");
+  frame?.contentWindow?.postMessage(
+    { call: "productQty", value: productQty },
+    "*"
+  );
+
   return (
     <section className="container">
       {start && <TransctionModal response={null} modalClose={modalClose} />}
       <div className="promotion" style={{ marginBottom: 30 }}>
         {carbonOffsetAmount === 0 && (
-          <Wiget
-            productQty={productQty}
-            carbonOffSetAmountCallback={carbonOffSetAmountCallback}
-          />
+          <iframe
+            src="http://localhost:3000/widget"
+            height="500"
+            width="500"
+            title="Carbon offset Iframe"
+            id="iframe_id"
+          ></iframe>
         )}
 
         <br />
-        {/* <label htmlFor="promo-code">Have A Promo Code?</label>
+        <label htmlFor="promo-code">Have A Promo Code?</label>
         <input type="text" onChange={onEnterPromoCode} placeholder="SUMMER" />
         <button
           type="button"
           onClick={checkPromoCode}
           style={{ borderRadius: 0 }}
-        /> */}
+        />
       </div>
 
       <div className="summary">
