@@ -59,7 +59,7 @@ const App = () => {
   });
   // -------------------------------------- Razorpay end
 
-  const navBarLessRoutes = ["/"];
+  const navBarLessRoutes = ["/", "/sample-1", "/sample-2"];
   return (
     <>
       <CssBaseline />

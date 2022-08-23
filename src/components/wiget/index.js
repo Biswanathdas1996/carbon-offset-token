@@ -30,7 +30,7 @@ export default function BasicCard({ productQty, carbonOffSetAmountCallback }) {
     <Card variant="outlined" style={{ padding: 10 }}>
       <CardContent>
         <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
-          Your carbon footprint will increase by <b>{tokenQty} matric ton </b>{" "}
+          Your carbon footprint will increase by <b>{tokenQty} metric ton </b>{" "}
           due to this journey
         </Typography>
 
@@ -48,7 +48,7 @@ export default function BasicCard({ productQty, carbonOffSetAmountCallback }) {
         >
           Qty:{" "}
           <span>
-            {tokenQty} <small style={{ fontSize: 12 }}>($10 / token)</small>
+            {tokenQty} <small style={{ fontSize: 12 }}>(₹10 / token)</small>
           </span>
         </Typography>
         <Typography

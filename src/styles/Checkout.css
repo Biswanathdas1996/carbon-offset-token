@@ -266,6 +266,7 @@ header .count {
 
 .empty-product {
   text-align: center;
+  margin: 50px;
 }
 
 .empty-product > button {
@@ -336,4 +337,27 @@ header .count {
   html {
     font-size: 16px;
   }
+}
+
+.header-wrapper-indigo {
+  background: url("../assets/images/top-1644343708.png");
+  /* background-position: top left; */
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+  height: 400px;
+}
+.header-wrapper-emirate {
+  background: url("../assets/images/new-hours-requirements_banner.jpg");
+  /* background-position: top left; */
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+  height: 400px;
 }

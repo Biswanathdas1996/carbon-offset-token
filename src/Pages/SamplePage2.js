@@ -13,9 +13,7 @@ import TransctionModal from "../components/shared/TransctionModal";
 
 function Header({ itemCount }) {
   return (
-    <header className="container" style={{ marginTop: 30 }}>
-      <h1>Airline 2</h1>
-
+    <header className="header-wrapper-emirate">
       <span className="count">{itemCount} tickets selected</span>
     </header>
   );
