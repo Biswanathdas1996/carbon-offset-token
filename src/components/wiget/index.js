@@ -3,10 +3,11 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import imgEquation from "../../assets/images/equation.gif";
 import CardMedia from "@mui/material/CardMedia";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useSearchParams } from "react-router-dom";
+import imgEquation from "../../assets/images/equation.gif";
 
 function formatCurrency(value) {
   return Number(value).toLocaleString("en-US", {
@@ -20,30 +21,17 @@ const VendorSchema = Yup.object().shape({
 });
 
 export default function BasicCard() {
-  const [productQty, setProductQty] = React.useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [productQty, setProductQty] = React.useState(
+    searchParams.get("product_quantity")
+  );
   const totalAmount = formatCurrency(productQty * 10);
   const tokenQty = productQty;
 
   const onClickHandler = ({ sendTo }) => {
     var data = { amount: Number(productQty * 10), address: sendTo };
-    var event = new CustomEvent("carbonOffSetAmountCallback", { detail: data });
-    window.parent.document.dispatchEvent(event);
+    window.parent.postMessage({ detail: data }, "*");
   };
-
-  //   ---------------------------get data from host
-  React.useEffect(() => {
-    window.addEventListener(
-      "message",
-      function (event) {
-        if (typeof event.data == "object" && event.data.call == "productQty") {
-          // Do something with event.data.value;
-          console.log(event.data.value);
-          setProductQty(event.data.value);
-        }
-      },
-      false
-    );
-  }, []);
 
   return (
     <Card variant="outlined" style={{ padding: 10 }}>

@@ -2,14 +2,8 @@ import React from "react";
 import "../styles/Checkout.css";
 import ImgGif from "../assets/images/indigo.png";
 import FlightIcon from "@mui/icons-material/Flight";
-import Wiget from "../components/wiget/index";
-import {
-  buyNftFromWight,
-  displayRazorpayForWiget,
-} from "../functions/buyNftFromWiget";
-import { _fetch } from "../CONTRACT-ABI/connect";
+import { displayRazorpayForWiget } from "../functions/buyNftFromWiget";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import TransctionModal from "../components/shared/TransctionModal";
 
 function Header({ itemCount }) {
   return (
@@ -88,53 +82,40 @@ function Summary({
 }) {
   const [carbonOffsetAmount, setCarbonOffsetAmount] = React.useState(0);
   const [isDoingPayment, setIsDoingPayment] = React.useState(false);
-  const [start, setStart] = React.useState(false);
-  const [tokens, setToken] = React.useState([]);
   const [walletAddress, setWalletAddress] = React.useState(null);
-
-  React.useEffect(() => {
-    fetchAllPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  async function fetchAllPosts() {
-    setToken([]);
-    const getAllToken = await _fetch("getCollection");
-    const mappedTokenData = [];
-    await getAllToken.map(async (val) => {
-      const getTokenListingState = await _fetch(
-        "getTokenListingState",
-        val?.token
-      );
-      const mappedData = { ...val, ...getTokenListingState };
-      if (mappedData?.tokenState === "1") {
-        mappedTokenData.push(mappedData);
-        setToken(mappedTokenData);
-      }
-    });
-  }
 
   const total = subTotal - discount + tax + carbonOffsetAmount;
   const productQty = products[0]?.quantity;
 
   const buynow = async (title) => {
     setIsDoingPayment(true);
-    var pickedToken = tokens.slice(0, productQty);
+    // var pickedToken = tokens.slice(0, productQty);
     await displayRazorpayForWiget(
       total,
       async function (response) {
-        setStart(true);
-        let responseData;
-        for (let i = 0; i < productQty; i++) {
-          responseData = await buyNftFromWight(
-            Number(pickedToken[i]?.token),
-            walletAddress
-          );
+        console.log("Call the token transfer api");
 
-          console.log("Called instance:", responseData);
-        }
-        onScuccess();
-        setStart(false);
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          product_quantity: productQty,
+          wallet_address: walletAddress,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+        fetch(
+          "https://carbon-offset-backend.herokuapp.com/transfer-token",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => alert("your ticket confirmed successfully"))
+          .catch((error) => console.log("error", error));
       },
       title
     );
@@ -145,37 +126,24 @@ function Summary({
     setCarbonOffsetAmount(0);
   }, [productQty]);
 
-  const modalClose = () => {
-    setStart(false);
-  };
-
   // ------------------------------------window events
   window.document.addEventListener(
     "carbonOffSetAmountCallback",
-    handleEvent,
+    function (e) {
+      console.log(e.detail);
+      const { amount, address } = e.detail;
+      setCarbonOffsetAmount(amount);
+      setWalletAddress(address);
+    },
     false
-  );
-
-  function handleEvent(e) {
-    console.log(e.detail);
-    const { amount, address } = e.detail;
-    setCarbonOffsetAmount(amount);
-    setWalletAddress(address);
-  }
-  // send data from host to iframe
-  var frame = document.querySelector("#iframe_id");
-  frame?.contentWindow?.postMessage(
-    { call: "productQty", value: productQty },
-    "*"
   );
 
   return (
     <section className="container">
-      {start && <TransctionModal response={null} modalClose={modalClose} />}
       <div className="promotion" style={{ marginBottom: 30 }}>
         {carbonOffsetAmount === 0 && (
           <iframe
-            src="http://localhost:3000/widget"
+            src={`http://localhost:3000/widget?product_quantity=${productQty}`}
             height="500"
             width="500"
             title="Carbon offset Iframe"
