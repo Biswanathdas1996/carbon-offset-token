@@ -6,15 +6,17 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Tooltip } from "@mui/material";
-
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { _fetch, _account } from "../../CONTRACT-ABI/connect";
 // import { buyNft, displayRazorpay } from "../../functions/buyNft";
 // import TransctionModal from "./TransctionModal";
 // import MarkAsFevourite from "./MarkAsFevourite";
-// import { getIcon } from "../../utils/currencyIcon";
-// import { getSymbol } from "../../utils/currencySymbol";
+import { getIcon } from "../../utils/currencyIcon";
+import { getSymbol } from "../../utils/currencySymbol";
 // import { convertWeiToToken } from "../../utils/convertPrice";
+import { buyNft, displayRazorpay } from "../../functions/buyNft";
 import {
   badgeUI,
   userAllowedActions,
@@ -31,6 +33,7 @@ export default function NFTCard({
   isUserProfilePage = false,
 }) {
   const [start, setStart] = useState(false);
+  const [price, setPrice] = useState(null);
   const [response, setResponse] = useState(null);
   const [owner, setOwner] = useState(null);
   const [account, setAccount] = useState(null);
@@ -38,7 +41,7 @@ export default function NFTCard({
   const [listingState, setListingState] = useState(null);
 
   const [loading, setLoading] = useState(false);
-
+  const [isDoingPayment, setIsDoingPayment] = useState(false);
   let history = useNavigate();
 
   useEffect(() => {
@@ -52,6 +55,8 @@ export default function NFTCard({
     setOwner(getOwner);
     const getTokenListingState = await _fetch("getTokenListingState", tokenId);
     setListingState(getTokenListingState?.tokenState);
+    const price = await _fetch("getNftPrice", tokenId);
+    setPrice(price);
     const account = await _account();
     setAccount(account);
     setLoading(false);
@@ -66,79 +71,88 @@ export default function NFTCard({
       return;
     }
   };
+
   return (
     <>
       {!loading ? (
-        <Grid
-          item
-          xs={2}
-          sm={2}
-          md={2}
-          style={{
-            border: "none",
-            boxShadow: "none",
-            cursor: "pointer",
-            padding: 1,
-            margin: 1,
-            overflow: "hidden",
-            height: 48,
+        // <Grid
+        //   item
+        //   xs={2}
+        //   sm={2}
+        //   md={2}
+        //   style={{
+        //     border: "none",
+        //     boxShadow: "none",
+        //     cursor: "pointer",
+        //     padding: 1,
+        //     margin: 1,
+        //     overflow: "hidden",
+        //     height: 48,
+        //   }}
+        // >
+        <Card
+          sx={{
+            height: "100%",
+            padding: 0.5,
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "white",
+            border: "0.01px solid rgba(0, 0, 0, 0.09)",
           }}
+          onClick={(e) => onClickOnPlot(e)}
         >
-          <Card
-            sx={{
-              // width: 50,
-              // display: "flex",
-              flexDirection: "column",
-              backgroundColor: badgeUI(listingState),
+          <img src={badgeUI(listingState)} alt="NFT img" height="130" />
 
-              borderRadius: 0,
-              boxShadow: "none",
+          <CardContent>
+            <Typography
+              style={{ fontSize: 13, cursor: "pointer", marginTop: 5 }}
+              variant="body2"
+              item
+              fontWeight="600"
+              sx={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                width: "11rem",
+              }}
+            >
+              {listingState === "1" ? "Offset" : "Offseted"} 1T Co2
+            </Typography>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              <b style={{ fontSize: 11 }}>
+                <span className="text-secondary" style={{ color: "grey" }}>
+                  Price:{" "}
+                </span>
+                <strong style={{ fontSize: 12, fontWeight: "bold" }}>
+                  {price / 1000000000000000000} {getSymbol()}
+                </strong>
+              </b>
+            </div>
+          </CardContent>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{
+              marginX: "15px",
+              marginBottom: "15px",
             }}
-            style={
-              !userAllowedActions.includes(listingState) &&
-              !isAdmin(account) &&
-              listingState !== "4"
-                ? { border: `0.01px solid ${badgeUI(listingState)}` }
-                : { border: "0.01px solid rgba(0, 0, 0, 0.25)" }
-            }
-            onClick={(e) => onClickOnPlot(e)}
+            // onClick={() => buynow(`NFT #${tokenId}`)}
+            style={{
+              border: "2px solid #1976d2",
+              fontSize: 10,
+              fontWeight: "bold",
+              padding: 6,
+            }}
           >
-            {assetHavingImage.includes(listingState) ? (
-              <CardMedia
-                component="img"
-                height="48"
-                image={badgeUI(listingState)}
-                alt="green iguana"
-                style={{
-                  borderRadius: "0px",
-                  overflow: "hidden",
-                }}
-              />
-            ) : (
-              <CardContent style={{ paddingBottom: 0, border: "none" }}>
-                <Typography
-                  style={{ fontSize: 10, cursor: "pointer" }}
-                  variant="body2"
-                  paragraph
-                  item
-                  fontWeight="500"
-                  sx={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    width: "11rem",
-                  }}
-                >
-                  {userAllowedActions.includes(listingState) ? (
-                    `${tokenId}`
-                  ) : (
-                    <p style={{ margin: 14.5 }}></p>
-                  )}
-                </Typography>
-              </CardContent>
-            )}
-          </Card>
-        </Grid>
+            {listingState === "1" ? "Buy Now" : "View"}
+          </Button>
+        </Card>
       ) : (
+        // </Grid>
         <Grid item xs={12} sm={6} md={2.4}>
           <Loader count="1" xs={12} sm={12} md={12} />
         </Grid>

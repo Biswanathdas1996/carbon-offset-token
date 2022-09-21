@@ -1,5 +1,5 @@
-import Grass from "../assets/images/grass.jpg";
-import Road from "../assets/images/road.png";
+import Grass from "../assets/images/images.png";
+import Road from "../assets/images/co2.png";
 
 export const allStates = [
   {

@@ -57,14 +57,14 @@ export default function HomePage() {
         ></Box>
         <br />
         <Grid container spacing={2} style={{ width: "100%" }}>
-          <Grid item xs={12} sm={12} md={8}>
+          <Grid item xs={12} sm={12} md={10}>
             <Grid container spacing={2} style={{ width: "100%" }}>
               {tokens && tokens?.length > 0 ? (
                 tokens?.map((item) => {
                   return (
-                    <>
+                    <Grid item xs={12} sm={12} md={3} lg={2}>
                       <NftCard tokenId={item?.token} />
-                    </>
+                    </Grid>
                   );
                 })
               ) : loading ? (
@@ -78,9 +78,7 @@ export default function HomePage() {
               )}
             </Grid>
           </Grid>
-          {/* <Grid item xs={12} sm={12} md={4}>
-            <PieChat />
-          </Grid> */}
+
           <Grid item xs={12} sm={12} md={2}>
             <IndicationTable />
           </Grid>

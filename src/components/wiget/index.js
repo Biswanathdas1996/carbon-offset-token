@@ -1,6 +1,5 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
@@ -65,8 +64,7 @@ export default function BasicCard() {
         >
           Total: <span>{totalAmount}</span>
         </Typography>
-      </CardContent>
-      <CardActions>
+        <br />
         <Formik
           initialValues={{
             sendTo: "",
@@ -79,7 +77,7 @@ export default function BasicCard() {
         >
           {({ touched, errors, isSubmitting, values }) => (
             <Form>
-              <div className="form-group" style={{ float: "left" }}>
+              <div className="form-group">
                 <Field
                   type="text"
                   name="sendTo"
@@ -88,7 +86,7 @@ export default function BasicCard() {
                   className={`form-control text-muted ${
                     touched?.sendTo && errors?.sendTo ? "is-invalid" : ""
                   }`}
-                  style={{ padding: 10 }}
+                  style={{ padding: 10, width: "100%" }}
                 />
               </div>
 
@@ -101,14 +99,14 @@ export default function BasicCard() {
                     className="btn btn-default btn-secondary"
                     type="submit"
                     value={"Add"}
-                    style={{ padding: 10, width: 100 }}
+                    style={{ padding: 10, width: 100, marginTop: 20 }}
                   />
                 </span>
               </div>
             </Form>
           )}
         </Formik>
-      </CardActions>
+      </CardContent>
     </Card>
   );
 }
