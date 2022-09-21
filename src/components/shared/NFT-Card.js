@@ -50,7 +50,7 @@ export default function NFTCard({
   }, []);
 
   async function fetchNftInfo() {
-    // setLoading(true);
+    setLoading(true);
     const getOwner = await _fetch("ownerOf", tokenId);
     setOwner(getOwner);
     const getTokenListingState = await _fetch("getTokenListingState", tokenId);
@@ -75,21 +75,6 @@ export default function NFTCard({
   return (
     <>
       {!loading ? (
-        // <Grid
-        //   item
-        //   xs={2}
-        //   sm={2}
-        //   md={2}
-        //   style={{
-        //     border: "none",
-        //     boxShadow: "none",
-        //     cursor: "pointer",
-        //     padding: 1,
-        //     margin: 1,
-        //     overflow: "hidden",
-        //     height: 48,
-        //   }}
-        // >
         <Card
           sx={{
             height: "100%",
@@ -134,7 +119,7 @@ export default function NFTCard({
             </div>
           </CardContent>
           <Button
-            variant="outlined"
+            variant={listingState === "1" ? "contained" : "outlined"}
             size="small"
             sx={{
               marginX: "15px",
@@ -153,7 +138,7 @@ export default function NFTCard({
         </Card>
       ) : (
         // </Grid>
-        <Grid item xs={12} sm={6} md={2.4}>
+        <Grid item xs={12} sm={12} md={12}>
           <Loader count="1" xs={12} sm={12} md={12} />
         </Grid>
       )}
