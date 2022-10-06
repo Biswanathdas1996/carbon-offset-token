@@ -261,7 +261,7 @@ const Mint = () => {
                                     >
                                       <option>-- Please select --</option>
                                       <option value="project-1">
-                                        Project 1
+                                        Sonar Green Project
                                       </option>
                                       <option value="project-2">
                                         Project 2

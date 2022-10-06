@@ -1,4 +1,4 @@
-import { _fetch, _account, _transction_signed } from "../CONTRACT-ABI/connect";
+import { _fetch, _transction_signed } from "../CONTRACT-ABI/connect";
 import { PaymentURI } from "../config";
 import PwcLogo from "../assets/images/nft.png";
 

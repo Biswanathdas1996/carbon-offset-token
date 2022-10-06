@@ -1,8 +1,5 @@
+import { getConfigData } from "../getConfigaration";
 export const currentNeteork = () => {
-  const getcurrentNetworkId = sessionStorage.getItem("currentyNetwork");
-  if (getcurrentNetworkId === "80001") {
-    return "Polygon";
-  } else {
-    return "Ethereum";
-  }
+  const config = getConfigData();
+  return config?.blockchain;
 };

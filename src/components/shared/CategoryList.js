@@ -55,7 +55,7 @@ export default function RecipeReviewCard() {
         </Grid>
 
         <Grid item xs={4}>
-          {cardUI(`Project 1`, imgx1, `/category/project-1`)}
+          {cardUI(`Sonar Green Project`, imgx1, `/category/project-1`)}
         </Grid>
         <Grid item xs={4}>
           {cardUI(`Project 2`, imgx2, `/category/project-2`)}
