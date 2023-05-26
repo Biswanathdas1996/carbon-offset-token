@@ -58,11 +58,11 @@ export default function RecipeReviewCard() {
           {cardUI(`Sonar Green Project`, imgx1, `/category/project-1`)}
         </Grid>
         <Grid item xs={4}>
-          {cardUI(`Project 2`, imgx2, `/category/project-2`)}
+          {cardUI(`Green Forest Program`, imgx2, `/category/project-2`)}
         </Grid>
 
         <Grid item xs={4}>
-          {cardUI(`Project 3`, imgx4, `/category/project-3`)}
+          {cardUI(`Solar Energy Program`, imgx4, `/category/project-3`)}
         </Grid>
       </Grid>
       <div style={{ marginTop: 50 }}></div>

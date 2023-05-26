@@ -19,15 +19,19 @@ import Blog1 from "../../assets/images/rrrrrr.gif";
 import Blog2 from "../../assets/images/Metaverse image.jpg";
 import Blog3 from "../../assets/images/sssss.gif";
 import Blog4 from "../../assets/images/co2.gif";
+import openingFront from "../../assets/images/opening-front-page.jpg";
+import Earth from "../../assets/images/The_Blue_Marble_(remastered).jpg";
+import ClimetBomb from "../../assets/images/Climate_Change_1679584173402_1679584185272_1679584185272.png";
+import { Title } from "@material-ui/icons";
 
 export default function RecipeReviewCard() {
-  const cardUI = (text, img, user, height) => {
+  const cardUI = (title, date, text, img, height = "350", link) => {
     return (
       <Card>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {user}
+              {/* {user} */}
             </Avatar>
           }
           action={
@@ -35,8 +39,8 @@ export default function RecipeReviewCard() {
               <MoreVertIcon />
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={title}
+          subheader={date}
         />
         <CardMedia
           component="img"
@@ -53,9 +57,11 @@ export default function RecipeReviewCard() {
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+          <a href={link} target="_blank" rel="noreferrer">
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </a>
         </CardActions>
       </Card>
     );
@@ -78,32 +84,42 @@ export default function RecipeReviewCard() {
 
         <Grid item xs={8}>
           {cardUI(
-            `This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.`,
-            Blog3
+            `UN climate report stresses urgency to act to secure a livable future`,
+            `April 15, 2023`,
+            `There are multiple, feasible and effective options to reduce greenhouse gas emissions and adapt to human-caused climate change, and they are available now, said scientists in the latest report released by the Intergovernmental Panel on Climate Change (IPCC) on 20 March.`,
+            Blog3,
+            "350",
+            `https://www.ipcc.ch/report/ar6/syr/`
           )}
         </Grid>
         <Grid item xs={4}>
           {cardUI(
-            `This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests.`,
-            Blog1
+            `Only one Mother Earth`,
+            `April 22, 2023`,
+            `On International Mother Earth Day, the UN Chief urged people everywhere “to raise your voices and demand leaders make peace with nature.`,
+            Earth,
+            "350",
+            `https://www.un.org/en/observances/earth-day`
           )}
         </Grid>
         <Grid item xs={4}>
           {cardUI(
-            `This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests.`,
-            Blog2
+            `How to defuse the climate time-bomb?`,
+            `March 31, 2023`,
+            `There are multiple, feasible and effective options to reduce greenhouse gas emissions and adapt to human-caused climate change, and they are available now, said scientists in the latest Intergovernmental Panel on Climate Change (IPCC) report.`,
+            ClimetBomb,
+            "350",
+            `https://www.youtube.com/watch?v=ZtlE4kgmb4k`
           )}
         </Grid>
         <Grid item xs={8}>
           {cardUI(
-            `This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.`,
-            Blog4
+            `See what climate action looks like`,
+            `April 15, 2023`,
+            `Take a look at #MyClimateAction – a photo and video contest conducted by the Agora mobile app, in support of the UN’s ActNow campaign. Be inspired by people taking action and championing solutions to drive change.Are you committed to climate action? Join the ActNow campaign to take steps towards transitioning to a low-carbon world and speak up and demand action from governments and businesses.`,
+            openingFront,
+            "350",
+            `https://www.ipcc.ch/report/ar6/syr/`
           )}
         </Grid>
       </Grid>

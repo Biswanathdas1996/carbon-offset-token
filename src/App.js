@@ -81,25 +81,7 @@ const App = () => {
       {navBarLessRoutes.indexOf(location.pathname) === -1 && (
         <Header icon={icon} symbol={symbol} />
       )}
-      {accessable ? (
-        <Routes />
-      ) : (
-        <>
-          {!loading ? (
-            <h2 style={{ textAlign: "center", margin: "12.5rem" }}>
-              Please change the blockchain network to{" "}
-              <b>{activeNetwork?.toUpperCase()}</b>
-            </h2>
-          ) : (
-            <div
-              style={{ textAlign: "center", margin: "12.5rem" }}
-              className="loader_background"
-            >
-              <h1 className="loader_ui">Loading configurations...</h1>
-            </div>
-          )}
-        </>
-      )}
+      <Routes />
       {footerLessRoutes.indexOf(location.pathname) === -1 && <Footer />}
     </>
   );

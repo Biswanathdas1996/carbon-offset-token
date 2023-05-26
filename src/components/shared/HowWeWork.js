@@ -19,7 +19,7 @@ export default function MultiActionAreaCard() {
               color="text.primary"
               style={{ fontSize: 17, fontWeight: "bold" }}
             >
-              How it work
+              How it works
             </Typography>
             <Typography
               component="h5"
@@ -28,11 +28,10 @@ export default function MultiActionAreaCard() {
               color="text.primary"
               style={{ fontSize: 17, marginTop: 30 }}
             >
-              he person uses a tool to calculate the emissions released on that
-              flight and then buys a carbon credit from a broker to offset that
-              amount of emissions. The broker subtracts its fee and uses the
-              rest of the money to invest in an emissions project, such as a
-              reforestation effort.
+              Users calculate the emissions released on a flight and then buy a
+              carbon credit from a broker to offset that amount of emissions.
+              The broker subtracts its fee and uses the rest of the money to
+              invest in an emissions project, such as a reforestation effort.
             </Typography>
           </Card>
           <img
